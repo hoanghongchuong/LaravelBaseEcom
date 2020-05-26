@@ -47,3 +47,15 @@ Route::prefix('menu')->group(function() {
     Route::post('/update/{id}', 'Admin\MenuController@update')->name('menu.update');
     Route::get('/delete/{id}', 'Admin\MenuController@delete')->name('menu.delete');
 });
+
+Route::prefix('users')->group(function () {
+   Route::get('/', 'Admin\UserController@index')->name('users.index');
+   Route::get('/edit/{id}', 'Admin\UserController@edit')->name('users.edit');
+
+   Route::get('/create', 'Admin\UserController@create')->name('users.create');
+   Route::get('/delete/{id}', 'Admin\UserController@delete')->name('users.delete');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

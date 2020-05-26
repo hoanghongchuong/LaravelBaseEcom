@@ -14,6 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 Home page
+                <p><a href="">Admin</a></p>
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
