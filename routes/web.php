@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function() {
+Route::get('/home', function () {
     return view('home');
 });
 
@@ -23,12 +23,27 @@ Route::prefix('categories')->group(function () {
         'as' => 'categories.index',
         'uses' => 'Admin\CategoryController@index'
     ]);
-   Route::get('/create', [
-       'as' => 'categories.create',
-       'uses' => 'Admin\CategoryController@create'
-   ]);
-   Route::post('/store', [
-       'as' => 'categories.store',
-       'uses' => 'Admin\CategoryController@store'
-   ]);
+    Route::get('/create', [
+        'as' => 'categories.create',
+        'uses' => 'Admin\CategoryController@create'
+    ]);
+    Route::post('/store', [
+        'as' => 'categories.store',
+        'uses' => 'Admin\CategoryController@store'
+    ]);
+    Route::get('edit/{id}', 'Admin\CategoryController@edit')->name('categories.edit');
+    Route::post('/update/{id}', [
+        'as' => 'categories.update',
+        'uses' => 'Admin\CategoryController@update'
+    ]);
+    Route::get('delete/{id}', 'Admin\CategoryController@delete')->name('categories.delete');
+});
+
+Route::prefix('menu')->group(function() {
+    Route::get('/', 'Admin\MenuController@index')->name('menu.index');
+    Route::get('/create', 'Admin\MenuController@create')->name('menu.create');
+    Route::post('/store', 'Admin\MenuController@store')->name('menu.store');
+    Route::get('/edit/{id}', 'Admin\MenuController@edit')->name('menu.edit');
+    Route::post('/update/{id}', 'Admin\MenuController@update')->name('menu.update');
+    Route::get('/delete/{id}', 'Admin\MenuController@delete')->name('menu.delete');
 });

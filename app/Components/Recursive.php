@@ -9,11 +9,15 @@ class Recursive {
         $this->data = $data;
     }
 
-    public function recursive($id = 0, $text = '') {
+    public function recursive($parent_id, $id = 0, $text = '') {
         foreach($this->data as $cate) {
             if($cate->parent_id === $id) {
-                $this->htmlSelect .= "<option>".$text.$cate->name."</option>";
-                $this->recursive($cate->id, $text. '-');
+                if(!empty($parent_id) && $parent_id == $cate->id) {
+                    $this->htmlSelect .= "<option selected value=$cate->id >".$text.$cate->name."</option>";
+                } else {
+                    $this->htmlSelect .= "<option value=$cate->id >".$text.$cate->name."</option>";
+                }
+                $this->recursive($parent_id, $cate->id, $text. '-');
             }
         }
         return $this->htmlSelect;

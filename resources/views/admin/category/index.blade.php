@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('title')
-    <title>Admin</title>
+    <title>Category</title>
 @endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -18,38 +18,32 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Created date</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($listCategory as $item)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row">{{$item->id}}</th>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->slug}}</td>
+                                <td>{{$item->created_at}}</td>
+                                <td>
+                                    <a href="{{route('categories.edit', $item->id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('categories.delete', $item->id)}}" class="btn btn-danger">Delete</a>
+                                </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-md-12">{{$listCategory->links()}}</div>
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
     </div>
 @endsection

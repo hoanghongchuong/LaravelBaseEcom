@@ -3,11 +3,8 @@
     <title>Admin</title>
 @endsection
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @include('admin.partials.content_header', ['name' => 'Category', 'key' => 'Add'])
-
-        <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -30,9 +27,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
     </div>
 @endsection
