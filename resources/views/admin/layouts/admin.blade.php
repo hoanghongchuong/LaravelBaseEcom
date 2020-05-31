@@ -7,12 +7,11 @@
 
     @yield('title')
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{!! asset('adminlte/plugins/fontawesome-free/css/all.min.css') !!}">
-    <!-- Theme style -->
     <link rel="stylesheet" href="{!! asset('adminlte/dist/css/adminlte.min.css') !!}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -22,8 +21,6 @@
 <!-- Main Sidebar Container -->
 @include('admin.partials.sidebar')
     @yield('content')
-
-    <!-- Main Footer -->
     @include('admin.partials.footer')
 </div>
 
@@ -33,5 +30,6 @@
 <script src="{!! asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
 <!-- AdminLTE App -->
 <script src="{!! asset('adminlte/dist/js/adminlte.min.js') !!}"></script>
+@yield('js')
 </body>
 </html>

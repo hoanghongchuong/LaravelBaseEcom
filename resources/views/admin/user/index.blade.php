@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    <title>Trang chu</title>
+    <title>List user</title>
 @endsection
 
 {{--@section('css')--}}
@@ -22,6 +22,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    @include('flash-message')
                     <div class="col-md-12">
                         <a href="{{ route('users.create') }}" class="btn btn-success float-right m-2"> Add</a>
                     </div>

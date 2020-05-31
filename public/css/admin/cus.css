@@ -1,0 +1,4 @@
+.select2-selection__choice, .select2-selection__choice__remove{
+    background-color: #0c525d !important;
+    border: none !important;
+}

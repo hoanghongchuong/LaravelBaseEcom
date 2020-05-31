@@ -53,6 +53,7 @@ Route::prefix('users')->group(function () {
    Route::get('/edit/{id}', 'Admin\UserController@edit')->name('users.edit');
 
    Route::get('/create', 'Admin\UserController@create')->name('users.create');
+   Route::post('/store', 'Admin\UserController@store')->name('users.store');
    Route::get('/delete/{id}', 'Admin\UserController@delete')->name('users.delete');
 });
 
