@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
+use PHPUnit\Exception;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Hash;
@@ -23,23 +25,53 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    public function edit($id) {
-
-    }
     public function create() {
         $roles = $this->role->all();
         return view('admin.user.add', compact('roles'));
     }
     public function store(Request $request) {
-        $user = $this->user->create([
-           'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        $user->roles()->attach($request->role_id);
+        DB::beginTransaction();
+        try {
+            $user = $this->user->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            $user->roles()->attach($request->role_id);
+            DB::commit();
+        } catch (ModelNotFoundException  $exception) {
+            DB::rollBack();
+            return back()->withError($exception->getMessage())->withInput();
+        }
         return redirect()->route('users.index')->with('success', 'Thêm thành công');
     }
+
+    public function edit($id) {
+        $user = $this->user->findOrFail($id);
+        $roles = $this->role->all();
+        $roleUser = $user->roles;
+        return view('admin.user.edit', compact('user', 'roles', 'roleUser'));
+    }
+
     public function update(Request $request, $id) {
+
+
+        DB::beginTransaction();
+        try {
+            $user = $this->user->findOrFail($id);
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            $user = $this->user->find($id);
+            $user->roles()->sync($request->role_id);
+            DB::commit();
+        } catch (ModelNotFoundException  $exception) {
+            DB::rollBack();
+            return back()->withError($exception->getMessage())->withInput();
+        }
+        return redirect()->back()->with('success', 'Sửa thành công');
 
     }
     public function delete($id) {

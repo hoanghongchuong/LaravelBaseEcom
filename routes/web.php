@@ -50,10 +50,10 @@ Route::prefix('menu')->group(function() {
 
 Route::prefix('users')->group(function () {
    Route::get('/', 'Admin\UserController@index')->name('users.index');
-   Route::get('/edit/{id}', 'Admin\UserController@edit')->name('users.edit');
-
    Route::get('/create', 'Admin\UserController@create')->name('users.create');
    Route::post('/store', 'Admin\UserController@store')->name('users.store');
+   Route::get('/edit/{id}', 'Admin\UserController@edit')->name('users.edit');
+   Route::post('/edit/{id}', 'Admin\UserController@update')->name('users.update');
    Route::get('/delete/{id}', 'Admin\UserController@delete')->name('users.delete');
 });
 
